@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.endrullis.sta</groupId>
-	<artifactId>scala-tikz-animations</artifactId>
-	<version>0.9-SNAPSHOT</version>
+  <groupId>de.endrullis.sta</groupId>
+  <artifactId>scala-tikz-animations</artifactId>
+  <version>0.9-SNAPSHOT</version>
 
-	<packaging>jar</packaging>
-	<name>Scala Tikz Animations</name>
+  <packaging>jar</packaging>
+  <name>Scala Tikz Animations</name>
 
   <licenses>
     <license>
@@ -20,123 +20,140 @@
     </license>
   </licenses>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<scala.version>2.11.2</scala.version>
-	</properties>
+  <issueManagement>
+    <url>https://github.com/xylo/scala-tikz-animations/issues</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
 
-	<repositories>
-		<repository>
-			<id>scala-tools.org</id>
-			<name>Scala-tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
-		</repository>
-		<repository>
-			<id>scala-tools.org snapshots</id>
-			<name>Scala-tools Maven2 Snapshots</name>
-			<url>http://scala-tools.org/repo-snapshots</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>scala-tools.org</id>
-			<name>Scala-tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>scala-tools.org snapshots</id>
-			<name>Scala-tools Maven2 Snapshots</name>
-			<url>http://scala-tools.org/repo-snapshots</url>
-		</pluginRepository>
-	</pluginRepositories>
+  <scm>
+    <url>https://github.com/xylo/scala-tikz-animations</url>
+    <connection>scm:git:git://github.com/xylo/scala-tikz-animations.git</connection>
+    <developerConnection>scm:git:git@github.com:xylo/scala-tikz-animations.git</developerConnection>
+  </scm>
 
-	<dependencies>
-		<!-- Scala dependencies -->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <scala.version>2.11.2</scala.version>
+  </properties>
 
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.9</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+  <repositories>
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+    <repository>
+      <id>scala-tools.org snapshots</id>
+      <name>Scala-tools Maven2 Snapshots</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>scala-tools.org snapshots</id>
+      <name>Scala-tools Maven2 Snapshots</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </pluginRepository>
+  </pluginRepositories>
 
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>src-test</testSourceDirectory>
-		<plugins>
-			<!-- Scala compiler -->
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<goals><goal>compile</goal></goals>
-						<phase>compile</phase>
-					</execution>
-					<execution>
-						<id>test-compile</id>
-						<goals><goal>testCompile</goal></goals>
-						<phase>test-compile</phase>
-					</execution>
-					<execution>
-						<phase>process-resources</phase>
-						<goals><goal>compile</goal></goals>
-					</execution>
-				</executions>
-				<configuration>
-					<sourceDir>src</sourceDir>
-					<jvmArgs>
-						<jvmArg>-Xms64m</jvmArg>
-						<jvmArg>-Xmx1024m</jvmArg>
-					</jvmArgs>
-				</configuration>
-			</plugin>
-			<!-- Java compiler -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
+  <dependencies>
+    <!-- Scala dependencies -->
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
 
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attached</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-				<configuration>
-					<sourceDir>src</sourceDir>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src-test</testSourceDirectory>
+    <plugins>
+      <!-- Scala compiler -->
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <phase>compile</phase>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <phase>test-compile</phase>
+          </execution>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sourceDir>src</sourceDir>
+          <jvmArgs>
+            <jvmArg>-Xms64m</jvmArg>
+            <jvmArg>-Xmx1024m</jvmArg>
+          </jvmArgs>
+        </configuration>
+      </plugin>
+      <!-- Java compiler -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <sourceDir>src</sourceDir>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
