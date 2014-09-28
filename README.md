@@ -1,4 +1,4 @@
 scala-tikz-animations
 =====================
 
-Scala Tikz Animations
+This project provides a Scala internal DSL for writing Beamer animations in LaTeX.
