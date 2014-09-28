@@ -3,6 +3,10 @@ package de.endrullis.sta
 import java.awt.Color
 
 /**
+ * Default class for creating Tikz animations.
+ * It extends the BaseTikzAni by functions of BaseVarIC.
+ * Inherit from this class to describe your Tikz animation.
+ *
  * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
  */
 class ScalaTikzAni extends BaseTikzAni with BaseVarIC {

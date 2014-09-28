@@ -7,6 +7,9 @@ import io.Source
 import sys.process.Process
 
 /**
+ * Base class for creating Tikz animations.
+ * Just inherit your animation description from this class.
+ *
  * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
  */
 class BaseTikzAni extends App with MutableCodeContainer {
@@ -138,10 +141,11 @@ class BaseTikzAni extends App with MutableCodeContainer {
 
 }
 
-/** Slide options.
-  *
-	* @param title frame title
-  * @param options tex options for the included animation (e.g. with, autoplay, palindrome, ...)
-  * @param frameRate frame rate of the animation (if it shall be different from the frame rate of the animation)
-  */
+/**
+ * Slide options.
+ *
+ * @param title frame title
+ * @param options tex options for the included animation (e.g. with, autoplay, palindrome, ...)
+ * @param frameRate frame rate of the animation (if it shall be different from the frame rate of the animation)
+ */
 case class SlideOptions(title: String = null, options: String = "width=11cm,autoplay,palindrome", frameRate: Int = 0)
