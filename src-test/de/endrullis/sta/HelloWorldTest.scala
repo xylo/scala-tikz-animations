@@ -6,7 +6,7 @@ import org.specs2.specification.BeforeAll
 /**
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class TimedVar extends Specification with BeforeAll with BaseVarIC { def is = s2"""
+class HelloWorldTest extends Specification with BeforeAll with BaseVarIC { def is = s2"""
 
  This 'Hello World' animation should
    have 1 frame without last frame    $frameCountWithoutLastFrame
