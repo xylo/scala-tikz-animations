@@ -29,12 +29,12 @@ class BaseTikzAni extends App with MutableCodeContainer {
 	}
 
 	/** Prints the drawing commands on console. */
-	def draw() {
-		draw(System.out)
+	def print() {
+		print(System.out)
 	}
 
 	/** Prints the drawing commands to the given PrintStream. */
-	def draw(out: PrintStream) {
+	def print(out: PrintStream) {
 		val interval = timeInterval
 
 		out.println("% frame rate: " + conf.frameRate)
@@ -48,22 +48,29 @@ class BaseTikzAni extends App with MutableCodeContainer {
 		}
 	}
 
-	def frames(withLastFrame: Boolean) = {
+	/** Returns the frames of the animation. */
+	def frames(withLastFrame: Boolean, renderer: (Double, String) => String = (time, content) => content) = {
 		val list = new mutable.MutableList[String]
 
 		val interval = timeInterval
 
-		def frameCode(time: Double) = "% time: " + time + "\n" + generate(time).get
+		def frameCode(time: Double) = renderer(time, generate(time).get)
 
-		var time = interval.get.start
-		while (time < interval.get.end) {
-			list += frameCode(time)
-			time += 1/conf.frameRate
+		interval match {
+			case Some(inter) =>
+				var time = interval.get.start
+				while (time < interval.get.end) {
+					list += frameCode(time)
+					time += 1/conf.frameRate
+				}
+				if (withLastFrame) {
+					list += frameCode(interval.get.end)
+				}
+				list.toList
+
+			case None =>
+				List(frameCode(0))
 		}
-		if (withLastFrame) {
-			list += frameCode(interval.get.end)
-		}
-		list
 	}
 
 	/** Compiles the animation.
@@ -83,7 +90,9 @@ class BaseTikzAni extends App with MutableCodeContainer {
 
 		val withLastFrame = Option(createSlide).map(!_.options.contains("loop")).getOrElse(true)
 
-		val framesCode = frames(withLastFrame).map(Matcher.quoteReplacement).mkString("$1", "$2\n$1", "$2")
+		def renderer (time: Double, content: String) = "% time: " + time + "\n" + generate(time).get
+
+		val framesCode = frames(withLastFrame, renderer).map(Matcher.quoteReplacement).mkString("$1", "$2\n$1", "$2")
 
 		val templateText = Source.fromFile(conf.template).getLines().mkString("\n")
 		val content = templateText.

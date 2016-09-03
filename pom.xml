@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<scala.version>2.11.8</scala.version>
+	</properties>
+
 	<groupId>de.endrullis.sta</groupId>
 	<artifactId>scala-tikz-animations</artifactId>
 	<version>0.9-SNAPSHOT</version>
@@ -42,11 +47,6 @@
 		</repository>
 	</distributionManagement>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<scala.version>2.11.8</scala.version>
-	</properties>
-
 	<repositories>
 		<repository>
 			<id>scala-tools.org</id>
@@ -79,11 +79,10 @@
 			<artifactId>scala-library</artifactId>
 			<version>${scala.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.9</version>
+			<groupId>org.specs2</groupId>
+			<artifactId>specs2-core_2.11</artifactId>
+			<version>3.8.4</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

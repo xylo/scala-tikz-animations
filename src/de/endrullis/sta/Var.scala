@@ -4,7 +4,7 @@ package de.endrullis.sta
  * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
  */
 object Var {
-	def apply[T](value: T) = new Var[T,Any](value)
+	def apply[T](value: T) = new Var[T,T](value)
 }
 case class Var[T, TM](state: VarState[T]) extends AbstractVar[T, TM, Var[T, TM]] {
 	def this(value: T) = this(VarState(value))
@@ -41,25 +41,35 @@ abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generato
 		infiniteEvents.find(_.contains(time)).map(_.generate(time))
 	}
 
+	/** Pauses the content for the next frame. */
 	def pause() = copyWithState(state.copy(pauses = state.pauses + state.nextStartTime))
 
+	/** Returns all pause times. */
 	def pauses = state.pauses
 
+	/** Defines that the content starts appearing after the given amount of time. */
 	def start(time: Double) = copyWithState(state.copy(nextStartTime = time))
+	/** Defines that the content starts appearing with the given time interval. */
 	def startWith(timeInterval: TimeInterval) = start(timeInterval.start)
+	/** Defines when the content starts appearing after the given time interval. */
 	def startAfter(timeInterval: TimeInterval) = start(timeInterval.end)
 
+	/** Sets the content to a new value. */
 	def setTo(value: T): TL = copyWithState(state.copy(lastValue = value))
 
+	/** Lets the content stay for the given amount of time. */
 	def stay(duration: Double): TL = perform(_ => state.lastValue, duration)(TimeMap.linear)
 
+	/** Lets the content change over time using the given value generator and duration. */
 	def change(valueGen: Double => T) = new {
 		def in(duration: Double)(implicit timeMap: TimeMap[TM]): TL = perform(valueGen, duration)
 		def in(timeMap: TimeMap[TM], duration: Double): TL = perform(valueGen, duration)(timeMap)
 	}
 
+	/** Hides the content for the given amount of time. */
 	def hide(duration: Double): TL = copyWithState(state.copy(nextStartTime = state.nextStartTime + duration))
 
+	/** Lets the content disappear after the next frame. */
 	def stop: TL = copyWithState(
 		state.copy(
 			eventsRev = new EndTimeSlot[T](state.nextStartTime) :: state.eventsRev
@@ -81,7 +91,7 @@ abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generato
 		)
 	}
 
-	def createEvent(duration: Double, valueGen: Double => T) = {
+	protected def createEvent(duration: Double, valueGen: Double => T) = {
 		TimeSlot(state.nextStartTime, duration, valueGen)
 	}
 }

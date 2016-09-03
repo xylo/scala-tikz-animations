@@ -30,7 +30,7 @@ trait CodeContainer extends Generator[String] with AbstractContainer {
 
 	override def toStringGenerator = this
 
-	def generateInternal(time: Double) = codeGenerators.toList.map(_.generate(time)).filter(_ != None).map(_.get) match {
+	def generateInternal(time: Double) = codeGenerators.toList.map(_.generate(time)).filter(_.isDefined).map(_.get) match {
 		case Nil  => None
 		case list => Some(list.mkString)
 	}
@@ -42,12 +42,12 @@ trait AbstractContainer {
 	def codeGenerators: Iterable[Generator[_]]
 	protected def timeIntervalJoin: (TimeInterval, TimeInterval) => Option[TimeInterval]
 
-	def timeInterval = codeGenerators.toList.filter(_.timeInterval != None).map(_.timeInterval.get) match {
+	def timeInterval = codeGenerators.toList.filter(_.timeInterval.isDefined).map(_.timeInterval.get) match {
 		case Nil  => None
 		case list => list.tail.foldLeft(Option(list.head))((a,b) => a.flatMap(timeIntervalJoin(_,b)))
 	}
-	def infiniteTimeInterval = if (timeInterval == None) None else {
-		codeGenerators.toList.filter(_.infiniteTimeInterval != None).map(_.infiniteTimeInterval.get) match {
+	def infiniteTimeInterval = if (timeInterval.isEmpty) None else {
+		codeGenerators.toList.filter(_.infiniteTimeInterval.isDefined).map(_.infiniteTimeInterval.get) match {
 			case Nil  => None
 			case list => list.tail.foldLeft(Option(list.head))((a,b) => a.flatMap(timeIntervalJoin(_,b)))
 		}
