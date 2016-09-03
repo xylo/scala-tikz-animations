@@ -10,9 +10,9 @@ import org.specs2.specification.BeforeAll
 class PosVarTest extends Specification with BeforeAll with BaseVarIC { def is = s2"""
 
  This 'PosVarTest' animation should
-   have 3 frames with last frame               $frameCountWithoutLastFrame
+   have 3 frames including the last frame      $frameCount
    contain the frames (0,2), (0.5,3), (1,4)    $containFrameHelloWorld
-                                 """
+ """
 
 	object Ani extends ScalaTikzAni {
 		implicit val movementTimeMap = TimeMap.linear[Pos]
@@ -25,7 +25,7 @@ class PosVarTest extends Specification with BeforeAll with BaseVarIC { def is = 
 	def beforeAll = Ani.main(Array())
 
 
-	def frameCountWithoutLastFrame =
+	def frameCount =
 		Ani.frames(true).size must_== 3
 
 	def containFrameHelloWorld =

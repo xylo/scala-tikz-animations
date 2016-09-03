@@ -12,7 +12,7 @@ class HelloWorldTest extends Specification with BeforeAll with BaseVarIC { def i
    have 1 frame without last frame    $frameCountWithoutLastFrame
    have 2 frames with last frame      $frameCountWithLastFrame
    contain the frame "Hello World"    $containFrameHelloWorld
-                                 """
+ """
 
 	object Ani extends ScalaTikzAni {
 		add("Hello World" start 0 stay 1)
