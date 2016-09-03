@@ -11,9 +11,16 @@ import java.awt.Color
  */
 class ScalaTikzAni extends BaseTikzAni with BaseVarIC {
 
+	/** Defines a LaTeX color. */
 	def defColor(name: String, definition: Generator[Color]) = ("""\definecolor{"""+name+"}{RGB}{")~definition~"}\n"
+
+	/** Defines a tikz style. */
 	def defTikzStyle(name: String, definition: Generator[String]) = ("""\tikzstyle{"""+name+"} = [")~definition~"]\n"
+
+	/** Opens a new scope. */
 	def scope(options: Generator[String], code: Generator[String]) = """\begin{scope}["""~options~"]"~code~"""\end{scope}"""
+
+	/** Creates a shifted scope. */
 	def shift(code: Generator[String], pos: Generator[Pos]) = scope("shift={"~pos~"}", code)
 
 }

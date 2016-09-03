@@ -2,9 +2,10 @@ package de.endrullis.sta
 
 import collection.mutable
 
-/**
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+/** Small experiment with string interpolation.
+	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
 object ViTest extends App {
 
 	implicit class TestHelper(val sc: StringContext) {
