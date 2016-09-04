@@ -25,7 +25,7 @@ object TimeMap {
 	def linear[T] = TimeMap[T](TimeFun.linear)
 
 	/** A sinus time map simulating acceleration and deceleration. */
-	def sin[T] = TimeMap[T](TimeFun.sin)
+	def sin[T] = TimeMap[T](TimeFun.sinus)
 
 	/** A sinus time map simulating acceleration. */
 	def accelerate[T] = TimeMap[T](TimeFun.accelerate)
@@ -42,7 +42,7 @@ object TimeFun {
 	val linear: TimeFun = identity
 
 	/** A sinus time map simulating acceleration and deceleration. */
-	val sin: TimeFun = rt => (math.cos(Pi + rt*Pi) + 1)/2
+	val sinus: TimeFun = rt => (math.cos(Pi + rt*Pi) + 1)/2
 
 	/** A sinus time map simulating acceleration. */
 	val accelerate: TimeFun = rt => 1-math.cos(rt*Pi/2)
