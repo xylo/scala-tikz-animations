@@ -1,17 +1,35 @@
 package de.endrullis.sta
 
 /**
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+	* A timed variable.
+	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+  */
 object Var {
 	def apply[T](value: T) = new Var[T,T](value)
 }
+/**
+	* A timed variable of type `T` with requires a TimeMap for `TM`.
+	*
+	* @param state variable state
+	* @tparam T    type of the variable
+	* @tparam TM   type of the TimeMap
+	*/
 case class Var[T, TM](state: VarState[T]) extends AbstractVar[T, TM, Var[T, TM]] {
 	def this(value: T) = this(VarState(value))
 
 	protected def copyWithState(state: VarState[T]) = copy(state)
 }
 
+/**
+	* A state of a timed variable.
+	*
+	* @param lastValue      the last value of the variable
+	* @param nextStartTime  start time of the next time event
+	* @param eventsRev      reverse list of the events of this variable collected so far
+	* @param pauses         set of frames this variable shall be paused
+	* @tparam T             type of the variable
+	*/
 case class VarState[T](lastValue: T, nextStartTime: Double = 0, eventsRev: List[TimeSlot[T]] = Nil, pauses: Set[Double] = Set())
 
 abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generator[T] {
@@ -32,7 +50,7 @@ abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generato
 		case Nil => None
 		case _ => Some(TimeInterval(events.head.startTime, state.eventsRev.head.endTime - events.head.startTime))
 	}
-	lazy val infiniteTimeInterval: Option[TimeInterval] = infiniteEvents.toList match {
+	lazy val infiniteTimeInterval: Option[TimeInterval] = infiniteEvents match {
 		case Nil => None
 		case _=> Some(TimeInterval(infiniteEvents.head.startTime, infiniteEvents.last.endTime - infiniteEvents.head.startTime))
 	}
@@ -96,7 +114,9 @@ abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generato
 	}
 }
 
+/** A generator is an abstract unit text/code depending on . */
 trait Generator[+T] { thisGenerator =>
+	/** Returns the time interval this generator is defined for. */
 	def timeInterval: Option[TimeInterval]
 	def infiniteTimeInterval: Option[TimeInterval]
 
@@ -129,12 +149,17 @@ trait Generator[+T] { thisGenerator =>
 		def pauses = thisGenerator.pauses
 	}
 
-	/** Concatenates this and the given generator. */
+	/** Concatenates this and that generator.
+		* The resulting generator is defined on the intersection of the time intervals of both generators.
+		*/
 	def ~[B] (that: Generator[B]): CodeContainer = new ImmutableCodeContainer (_ intersect _,
 		thisGenerator.toStringGenerator,
 		that.toStringGenerator
 	)
 
+	/** Combines this and that generator to a generator returning both results as a ~~ pair.
+		* The resulting generator is defined on the intersection of the time intervals of both generators.
+		*/
 	def ~~[B] (that: Generator[B]) = new Generator[T~~B] with AbstractContainer {
 		def codeGenerators = List(thisGenerator, that)
 
@@ -149,6 +174,14 @@ trait Generator[+T] { thisGenerator =>
 
 case class ~~[+A,+B](_1: A, _2: B)
 
+/**
+	* A TimeSlot defines a value generation function for a certain time slot.
+	*
+	* @param startTime  time when the value generation shall start
+	* @param duration   duration of the value generation
+	* @param time2value value generation function that takes the time as input
+	* @tparam T         type of the generated value
+	*/
 case class TimeSlot[T](startTime: Double, duration: Double, time2value: Double => T) {
 	def endTime = startTime + duration
 
@@ -156,5 +189,6 @@ case class TimeSlot[T](startTime: Double, duration: Double, time2value: Double =
 
 	def generate(time: Double) = time2value(time - startTime)
 }
+/** The EndTimeSlot marks the last frame of a timed variable. */
 class EndTimeSlot[T](time: Double) extends TimeSlot[T](time, 0, null) {
 }
