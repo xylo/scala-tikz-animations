@@ -4,6 +4,8 @@ import org.specs2._
 import org.specs2.specification.BeforeAll
 
 /**
+	* Tests for a small 'Hello World' example.
+	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
 class HelloWorldTest extends Specification with BeforeAll with BaseVarIC { def is = s2"""

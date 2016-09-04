@@ -3,7 +3,8 @@ package de.endrullis.sta
 import org.specs2._
 import org.specs2.specification.BeforeAll
 
-/** Tests for PosVar.
+/**
+	* Tests for PosVar.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/

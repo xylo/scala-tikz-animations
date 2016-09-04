@@ -3,10 +3,13 @@ package de.endrullis.sta
 import utils.PathUtils
 
 /**
- * Position variable.
- *
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+	* A position variable for Tikz.
+	*
+	* @param startPos start position
+	* @param state    variable state
+	* @tparam TM      type of the TimeMap
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
 case class PosVar[TM](startPos: Pos, state: VarState[Pos]) extends AbstractVar[Pos, TM, PosVar[TM]] { thisVar =>
 	protected def copyWithState(state: VarState[Pos]) = copy(state = state)
 
@@ -31,7 +34,7 @@ case class PosVar[TM](startPos: Pos, state: VarState[Pos]) extends AbstractVar[P
 	}
 	*/
 
-	def combine[T](o1: Option[T], o2: Option[T])(f: (T, T) => T): Option[T] = for (v1 <- o1; v2 <- o2) yield f(v1,v2)
+	protected def combine[T](o1: Option[T], o2: Option[T])(f: (T, T) => T): Option[T] = for (v1 <- o1; v2 <- o2) yield f(v1,v2)
 
 	//override def toStringGenerator = map(c => c.getRed+","+c.getGreen+","+c.getBlue)
 }

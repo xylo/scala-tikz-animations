@@ -4,7 +4,8 @@ import java.lang.Math._
 
 import org.specs2._
 
-/** Tests for deceleration TimeMap.
+/**
+	* Tests for deceleration TimeMap.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/

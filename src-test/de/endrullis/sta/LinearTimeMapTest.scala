@@ -2,7 +2,8 @@ package de.endrullis.sta
 
 import org.specs2._
 
-/** Tests for linear TimeMap.
+/**
+	* Tests for linear TimeMap.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/

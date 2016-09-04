@@ -2,10 +2,10 @@ package de.endrullis.sta
 
 
 /**
- * String variable.
- *
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+	* String variable.
+	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
 object StringVar {
 	def apply[TM](startValue: String) = new StringVar[TM](startValue, VarState(startValue))
 }

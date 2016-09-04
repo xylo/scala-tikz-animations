@@ -3,7 +3,8 @@ package de.endrullis.sta
 import org.specs2._
 import Math._
 
-/** Tests for acceleration TimeMap.
+/**
+	* Tests for acceleration TimeMap.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
