@@ -5,6 +5,14 @@ import utils.PathUtils
 /**
 	* A position variable for Tikz.
 	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
+object PosVar {
+	def apply[TM](startPos: Pos): PosVar[TM] = new PosVar[TM](startPos, VarState(startPos))
+}
+/**
+	* A position variable for Tikz.
+	*
 	* @param startPos start position
 	* @param state    variable state
 	* @tparam TM      type of the TimeMap

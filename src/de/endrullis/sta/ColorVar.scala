@@ -4,10 +4,13 @@ import java.awt.Color
 import utils.ColorUtils
 
 /**
- * Color variable.
- *
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+	* Color variable.
+	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
+object ColorVar {
+	def apply[TM](startColor: Color): ColorVar[TM] = new ColorVar[TM](startColor, VarState(startColor))
+}
 case class ColorVar[TM](startColor: Color, state: VarState[Color]) extends AbstractVar[Color, TM, ColorVar[TM]] {
 	protected def copyWithState(state: VarState[Color]) = copy(state = state)
 

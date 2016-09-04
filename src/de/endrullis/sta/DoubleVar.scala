@@ -1,11 +1,13 @@
 package de.endrullis.sta
 
-
 /**
- * Double variable.
- *
- * @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
- */
+	* Double variable.
+	*
+	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
+	*/
+object DoubleVar {
+	def apply[TM](startValue: Double): DoubleVar[TM] = new DoubleVar[TM](startValue, VarState(startValue))
+}
 case class DoubleVar[TM](startValue: Double, state: VarState[Double]) extends AbstractVar[Double, TM, DoubleVar[TM]] {
 	protected def copyWithState(state: VarState[Double]) = copy(state = state)
 

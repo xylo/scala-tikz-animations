@@ -1,6 +1,5 @@
 package de.endrullis.sta
 
-
 /**
 	* String variable.
 	*

@@ -12,10 +12,10 @@ import scala.language.implicitConversions
 trait BaseVarIC extends PosIC {
 
 	implicit def value2var[T,TM](value: T): Var[T,T] = Var[T](value)
-	implicit def var2stringVar(value: String): StringVar[String] = new StringVar[String](value, VarState(value))
-	implicit def color2var(color: Color): ColorVar[Color] = new ColorVar[Color](color, VarState(color))
-	implicit def double2var(value: Double): DoubleVar[Double] = new DoubleVar[Double](value, VarState(value))
-	implicit def pos2var(pos: Pos): PosVar[Pos] = new PosVar[Pos](pos, VarState(pos))
+	implicit def var2stringVar(value: String): StringVar[String] = StringVar[String](value)
+	implicit def color2var(color: Color): ColorVar[Color] = ColorVar[Color](color)
+	implicit def double2var(value: Double): DoubleVar[Double] = DoubleVar[Double](value)
+	implicit def pos2var(pos: Pos): PosVar[Pos] = PosVar[Pos](pos)
 
 	implicit class StringExt(s: String) {
 		/**
