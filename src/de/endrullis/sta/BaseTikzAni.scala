@@ -88,7 +88,7 @@ class BaseTikzAni extends App with MutableCodeContainer {
 		val file = new File(filename + ".tex")
 		file.getAbsoluteFile.getParentFile.mkdirs()
 
-		val withLastFrame = Option(createSlide).map(!_.options.contains("loop")).getOrElse(true)
+		val withLastFrame = Option(createSlide).forall(!_.options.contains("loop"))
 
 		def renderer (time: Double, content: String) = "% time: " + time + "\n" + generate(time).get
 
@@ -126,14 +126,9 @@ class BaseTikzAni extends App with MutableCodeContainer {
 		val aniContent = if (pauses.isEmpty) {
 			animate()
 		} else {
-			(0.0 :: pauses.toList.sorted.toList ::: List(timeInterval.get.end)).sliding(2).map{ case List(start, end) =>
+			(0.0 :: pauses.toList.sorted ::: List(timeInterval.get.end)).sliding(2).map{ case List(start, end) =>
 				animate((start*frameRate).toInt.toString, (end*frameRate).toInt.toString)
 			}.zipWithIndex.map{case (code, index) => "\\only<"+(index+1)+">{"+code+"}%"}.mkString("\n")
-		}
-
-		val frameContent = {
-			Option(slide.title).map("\\frametitle" + _ + "}\n\n").getOrElse("") +
-			"\\begin{center}\n" + aniContent + "\n\\end{center}\n"
 		}
 
 		val content = templateText.replaceAll("""\$\{FRAME_CONTENT\}""", Matcher.quoteReplacement(aniContent)+"\n")
