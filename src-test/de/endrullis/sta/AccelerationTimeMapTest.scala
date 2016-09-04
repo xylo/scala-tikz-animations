@@ -11,9 +11,9 @@ class AccelerationTimeMapTest extends Specification with BaseVarIC { def is = s2
 
  An acceleration TimeMap applied to a variable change from 0 to 1 should
    return  0.00 at 0.00      $checkTime0
-   return ~0.15 at 0.25      $checkTime25
-   return  0.50 at 0.50      $checkTime50
-   return ~0.85 at 0.75      $checkTime75
+   return ~0.08 at 0.25      $checkTime25
+   return ~0.29 at 0.50      $checkTime50
+   return ~0.62 at 0.75      $checkTime75
    return  1.00 at 1.00      $checkTime100
  """
 
