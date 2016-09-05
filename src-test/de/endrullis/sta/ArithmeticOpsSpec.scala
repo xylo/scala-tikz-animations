@@ -1,13 +1,16 @@
 package de.endrullis.sta
 
+import org.junit.runner.RunWith
 import org.specs2._
+import org.specs2.runner.JUnitRunner
 
 /**
 	* Tests for arithmetic variable operations.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class ArithmeticOpsTest extends Specification with BaseVarIC { def is = s2"""
+@RunWith(classOf[JUnitRunner])
+class ArithmeticOpsSpec extends Specification with BaseVarIC { def is = s2"""
 
  x[0 -> 1 in 1s] + y[2 -> 3 in 2s] should
    have a time interval of 1s duration         $plusTimeIntervalDuration

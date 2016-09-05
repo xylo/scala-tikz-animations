@@ -1,6 +1,8 @@
 package de.endrullis.sta
 
+import org.junit.runner.RunWith
 import org.specs2._
+import org.specs2.runner.JUnitRunner
 import org.specs2.specification.BeforeAll
 
 /**
@@ -8,9 +10,10 @@ import org.specs2.specification.BeforeAll
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class PosVarTest extends Specification with BeforeAll with BaseVarIC { def is = s2"""
+@RunWith(classOf[JUnitRunner])
+class PosVarSpec extends Specification with BeforeAll with BaseVarIC { def is = s2"""
 
- This 'PosVarTest' animation should
+ This 'PosVarSpec' animation should
    have 3 frames including the last frame      $frameCount
    contain the frames (0,2), (0.5,3), (1,4)    $containFrameHelloWorld
  """

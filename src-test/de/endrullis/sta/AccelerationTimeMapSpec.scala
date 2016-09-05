@@ -3,12 +3,16 @@ package de.endrullis.sta
 import org.specs2._
 import Math._
 
+import org.junit.runner.RunWith
+import org.specs2.runner.JUnitRunner
+
 /**
 	* Tests for acceleration TimeMap.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class AccelerationTimeMapTest extends Specification with BaseVarIC { def is = s2"""
+@RunWith(classOf[JUnitRunner])
+class AccelerationTimeMapSpec extends Specification with BaseVarIC { def is = s2"""
 
  An acceleration TimeMap applied to a variable change from 0 to 1 should
    return  0.00 at 0.00      $checkTime0

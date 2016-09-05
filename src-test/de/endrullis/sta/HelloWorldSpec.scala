@@ -1,6 +1,8 @@
 package de.endrullis.sta
 
+import org.junit.runner.RunWith
 import org.specs2._
+import org.specs2.runner.JUnitRunner
 import org.specs2.specification.BeforeAll
 
 /**
@@ -8,7 +10,8 @@ import org.specs2.specification.BeforeAll
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class HelloWorldTest extends Specification with BeforeAll with BaseVarIC { def is = s2"""
+@RunWith(classOf[JUnitRunner])
+class HelloWorldSpec extends Specification with BeforeAll with BaseVarIC { def is = s2"""
 
  This 'Hello World' animation should
    have 1 frame without last frame    $frameCountWithoutLastFrame

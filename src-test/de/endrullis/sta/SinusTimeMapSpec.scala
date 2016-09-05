@@ -1,13 +1,16 @@
 package de.endrullis.sta
 
+import org.junit.runner.RunWith
 import org.specs2._
+import org.specs2.runner.JUnitRunner
 
 /**
 	* Tests for sinus TimeMap.
 	*
 	* @author Stefan Endrullis &lt;stefan@endrullis.de&gt;
 	*/
-class SinusTimeMapTest extends Specification with BaseVarIC { def is = s2"""
+@RunWith(classOf[JUnitRunner])
+class SinusTimeMapSpec extends Specification with BaseVarIC { def is = s2"""
 
  A sinus TimeMap applied to a variable change from 0 to 1 should
    return  0.00 at 0.00      $checkTime0
