@@ -11,7 +11,7 @@ package object sta {
 
 	type TimeFun = Double => Double
 
-	implicit def doubleTildeExt[T1](t1: T1) = new {
+	implicit class doubleTildeExt[T1](t1: T1) {
 		def ~~[T2](t2: T2): T1 ~~ T2 = new ~~(t1, t2)
 	}
 

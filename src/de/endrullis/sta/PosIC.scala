@@ -9,7 +9,7 @@ import scala.language.implicitConversions
  */
 trait PosIC {
 	implicit def doublePair2pos(pos: (Double, Double)): Pos = Pos(pos._1, pos._2)
-	implicit def double2posCompatibleDouble(d: Double) = new {
+	implicit class double2posCompatibleDouble(d: Double) {
 		def * (pos: Pos) = pos * d
 	}
 }

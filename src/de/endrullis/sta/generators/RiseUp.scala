@@ -18,7 +18,8 @@ class RiseUp[TM](f: (Double, Double, TimeMap[TM]) => Generator[String]) {
 	def riseUpIn(timeMap: TimeMap[TM], duration: Double) = f(0, duration, timeMap)
 
 	/** Starts this rise up in the given number of seconds. */
-	def start(startTime: Double) = new {
+	def start(startTime: Double) = new Start(startTime)
+	class Start(startTime: Double) {
 		/** Lets the element appear immediately. */
 		def nonAnimated = f(startTime, 0, TimeMap.linear[TM])
 		/** Rises up the element over the given period of time. */

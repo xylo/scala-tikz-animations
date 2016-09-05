@@ -15,7 +15,8 @@ case class ColorVar[TM](startColor: Color, state: VarState[Color]) extends Abstr
 	protected def copyWithState(state: VarState[Color]) = copy(state = state)
 
 	/** Cross fades to the given color. */
-	def changeTo(color2: Color) = new {
+	def changeTo(color2: Color) = new ChangeTo(color2)
+	class ChangeTo(color2: Color) {
 		/** In the given duration. */
 		def in(duration: Double)(implicit timeMap: TimeMap[TM]) = change(ColorUtils.fadeOver(state.lastValue, color2)).in(duration)
 		/** In the given duration. */
