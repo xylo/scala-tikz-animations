@@ -79,7 +79,8 @@ abstract class AbstractVar[T, TM, TL <: AbstractVar[T, TM, TL]] extends Generato
 	def stay(duration: Double): TL = perform(_ => state.lastValue, duration)(TimeMap.linear)
 
 	/** Lets the content change over time using the given value generator and duration. */
-	def change(valueGen: Double => T) = new {
+	def change(valueGen: Double => T) = new Change(valueGen)
+	class Change(valueGen: Double => T) {
 		def in(duration: Double)(implicit timeMap: TimeMap[TM]): TL = perform(valueGen, duration)
 		def in(timeMap: TimeMap[TM], duration: Double): TL = perform(valueGen, duration)(timeMap)
 	}

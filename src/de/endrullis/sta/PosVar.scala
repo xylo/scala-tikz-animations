@@ -21,7 +21,8 @@ object PosVar {
 case class PosVar[TM](startPos: Pos, state: VarState[Pos]) extends AbstractVar[Pos, TM, PosVar[TM]] { thisVar =>
 	protected def copyWithState(state: VarState[Pos]) = copy(state = state)
 
-	def changeTo(color2: Pos) = new {
+	def changeTo(color2: Pos) = new ChangeTo(color2)
+	class ChangeTo(color2: Pos) {
 		def in(duration: Double)(implicit timeMap: TimeMap[TM]) = change(PathUtils.straightMovement(state.lastValue, color2)).in(duration)
 		def in(timeMap: TimeMap[TM], duration: Double) = change(PathUtils.straightMovement(state.lastValue, color2)).in(duration)(timeMap)
 	}
